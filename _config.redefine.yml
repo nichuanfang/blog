@@ -350,7 +350,8 @@ comment:
       clientSecret: 7980747344da18284f266ddc38f6e96a13c1c6d1
       repo: hexo-blog-comments # GitHub repository
       owner: nichuanfang # GitHub repository owner
-      proxy: https://proxy.cors.sh/https://github.com/login/oauth/access_token
+      # https://proxy.cors.sh/https://github.com/login/oauth/access_token
+      proxy: https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token
     # Twikoo comment system. See https://twikoo.js.org/
     twikoo:
       version: 1.6.10 # Twikoo version, do not modify if you dont know what it is
