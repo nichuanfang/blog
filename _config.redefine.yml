@@ -122,7 +122,7 @@ home_banner:
   title: '思想有光，笔触有温度'
   # Home banner subtitle
   subtitle:
-    text: [''] # subtitle text, array
+    text: ['Loading...'] # subtitle text, array
     # '一叶秋风一抹霞，半生浮沉半生茶。',
     # '人生无尽峰与谷，唯有心境自悠然。',
     # '若将岁月拂轻轻，不过流云与星辰。',
