@@ -3,22 +3,22 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: 个人博客
 subtitle: ''
-description: ''
-keywords:
-author: John Doe
-language: en
-timezone: ''
+description: '倪传方的个人博客'
+keywords: 个人博客
+author: Chuanfang Ni
+language: zh
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: http://blog.chuanfang.org
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
-  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
-  trailing_html: true # Set to false to remove trailing '.html' from permalinks
+  trailing_index: false # Set to false to remove trailing 'index.html' from permalinks
+  trailing_html: false # Set to false to remove trailing '.html' from permalinks
 
 # Directory
 source_dir: source
@@ -28,6 +28,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
+#匹配到的文件将会被不做改动地复制到 public 目录中
 skip_render:
 
 # Writing
@@ -39,10 +40,14 @@ external_link:
   field: site # Apply to the whole site
   exclude: ''
 filename_case: 0
+#显示草稿
 render_drafts: false
+#启用 资源文件夹
 post_asset_folder: false
+#把链接改为与根目录的相对位址
 relative_link: false
 future: true
+#代码高亮
 syntax_highlighter: highlight.js
 highlight:
   line_number: true
@@ -89,9 +94,9 @@ pagination_dir: page
 
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
-include:
-exclude:
-ignore:
+# include:
+# exclude:
+# ignore:
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
