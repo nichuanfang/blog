@@ -122,14 +122,14 @@ home_banner:
   title: '思想有光，笔触有温度'
   # Home banner subtitle
   subtitle:
-    text: [] # subtitle text, array
+    text: [''] # subtitle text, array
     # '一叶秋风一抹霞，半生浮沉半生茶。',
     # '人生无尽峰与谷，唯有心境自悠然。',
     # '若将岁月拂轻轻，不过流云与星辰。',
     hitokoto: # 一言配置
-      enable: false # Whether to enable hitokoto
+      enable: true # Whether to enable hitokoto
       show_author: false # Whether to show author
-      api: https://v1.hitokoto.cn # https://v1.hitokoto.cn  API URL, can add types, see https://developer.hitokoto.cn/sentence/#%E5%8F%A5%E5%AD%90%E7%B1%BB%E5%9E%8B-%E5%8F%82%E6%95%B0
+      api: https://vercel-proxy.chuanfang.org/hitokoto # https://v1.hitokoto.cn  API URL, can add types, see https://developer.hitokoto.cn/sentence/#%E5%8F%A5%E5%AD%90%E7%B1%BB%E5%9E%8B-%E5%8F%82%E6%95%B0
     typing_speed: 100 # Typing speed (ms)
     backing_speed: 80 # Backing speed (ms)
     starting_delay: 500 # Start delay (ms)
