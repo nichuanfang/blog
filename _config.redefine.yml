@@ -426,6 +426,7 @@ plugins:
         artist: John Lennon # audio artist
         url: https://evan.beee.top/music/Imagine%20-%20John%20Lennon.mp3 # audio url
         cover: https://evan.beee.top/music/covers/Lennon_Imagine_Sleeve_1975.jpg # audio cover
+        lrc: ''
   #      - name: # audio name
   #        artist: # audio artist
   #        url: # audio url
