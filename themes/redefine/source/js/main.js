@@ -1,11 +1,11 @@
 /* main function */
-import initUtils from './utils.js'
-import initTyped from './plugins/typed.js'
-import initModeToggle from './tools/lightDarkSwitch.js'
 import initLazyLoad from './layouts/lazyload.js'
-import initScrollTopBottom from './tools/scrollTopBottom.js'
-import initLocalSearch from './tools/localSearch.js'
+import initTyped from './plugins/typed.js'
 import initCopyCode from './tools/codeBlock.js'
+import initModeToggle from './tools/lightDarkSwitch.js'
+import initLocalSearch from './tools/localSearch.js'
+import initScrollTopBottom from './tools/scrollTopBottom.js'
+import initUtils from './utils.js'
 
 export const main = {
   themeInfo: {

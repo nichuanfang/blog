@@ -79,15 +79,35 @@ export const ModeToggle = {
   },
   //自适应模式
   autoMode() {
-    document.body.classList.remove('light-mode')
-    document.documentElement.classList.remove('light')
-    document.body.classList.add('dark-mode')
-    document.documentElement.classList.add('dark')
-    this.iconDom.className = 'fa-regular fa-brightness'
-    //根据时间切换
-    main.styleStatus.isDark = false
+    const currentHour = new Date().getHours() // 获取当前小时 (0-23)
+
+    // 定义白天和夜间的时间段
+    const nightStart = 18 // 晚上 6 点
+    const nightEnd = 6 // 早上 6 点
+
+    // 判断当前时间是否在夜间时间段
+    if (currentHour >= nightStart || currentHour < nightEnd) {
+      // 夜间模式
+      document.body.classList.remove('light-mode')
+      document.documentElement.classList.remove('light')
+      document.body.classList.add('dark-mode')
+      document.documentElement.classList.add('dark')
+      this.iconDom.className = 'fa-regular fa-brightness'
+      main.styleStatus.isDark = true
+      this.mermaidInit(this.mermaidDarkTheme)
+    } else {
+      // 白天模式
+      document.body.classList.remove('dark-mode')
+      document.documentElement.classList.remove('dark')
+      document.body.classList.add('light-mode')
+      document.documentElement.classList.add('light')
+      this.iconDom.className = 'fa-regular fa-moon'
+      main.styleStatus.isDark = false
+      this.mermaidInit(this.mermaidLightTheme)
+    }
+
+    // 更新样式状态
     main.setStyleStatus()
-    this.mermaidInit(this.mermaidDarkTheme)
     this.setGiscusTheme()
   },
 
@@ -124,8 +144,7 @@ export const ModeToggle = {
     const styleStatus = main.getStyleStatus()
     const authTheme = main.styleStatus.autoTheme
     //如果打开了自动切换主题 根据系统时间自动切换 优先级最高
-
-    if (authTheme) {
+    if (authTheme == undefined || authTheme) {
       this.autoMode()
     } else {
       if (styleStatus) {
