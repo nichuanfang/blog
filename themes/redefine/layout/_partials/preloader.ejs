@@ -131,8 +131,10 @@
       // 判断当前时间是否在夜间时间段
       if (currentHour >= nightStart || currentHour < nightEnd) {
         themeStatus = true // 夜间模式
+        localStorage.setItem('LightOrDark', 'dark')
       } else {
         themeStatus = false // 白天模式
+        localStorage.setItem('LightOrDark', 'light')
       }
     }
 
