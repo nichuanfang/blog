@@ -429,7 +429,7 @@ plugins:
 
       - name: From me to you # audio name
         artist: Foeniks # audio artist
-        url: https://static.chuanfang.org/Foeniks%20-%20From%20Me%20To%20You.mp3 # audio url
+        url: https://static.chuanfang.org/music/Foeniks%20-%20From%20Me%20To%20You.mp3 # audio url
         cover: '/images/music/Foeniks - From Me To You.jpg' # audio cover
         lrc: ''
   # .... you can add more audios here
