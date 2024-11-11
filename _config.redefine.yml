@@ -294,7 +294,7 @@ articles:
   # Code block settings
   code_block:
     copy: true # Whether to enable code block copy button
-    style: simple # mac | simple
+    style: mac # mac | simple
     highlight_theme: # Color scheme for highlightjs code highlighting. For preview, see https://highlightjs.org/examples
       light: github # light mode theme, support: github, atom-one-light, default
       dark: vs2015 # dark mode theme, support: github-dark, monokai-sublime, vs2015, night-owl, atom-one-dark, nord, tokyo-night-dark, a11y-dark, agate
@@ -354,8 +354,8 @@ comment:
       clientSecret: 7980747344da18284f266ddc38f6e96a13c1c6d1
       repo: hexo-blog-comments # GitHub repository
       owner: nichuanfang # GitHub repository owner
-      # https://proxy.cors.sh/https://github.com/login/oauth/access_token
-      proxy: https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token
+      # https://proxy.cors.sh/https://github.com/login/oauth/access_token https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token
+      proxy: https://vercel-proxy.chuanfang.org/github/login/oauth/access_token
     # Twikoo comment system. See https://twikoo.js.org/
     twikoo:
       version: 1.6.10 # Twikoo version, do not modify if you dont know what it is
