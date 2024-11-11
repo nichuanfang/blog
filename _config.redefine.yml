@@ -404,7 +404,6 @@ inject:
   # Inject custom head html code
   head:
     -
-    -
   # Inject custom footer html code
   footer:
     -

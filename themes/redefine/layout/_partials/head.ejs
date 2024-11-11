@@ -139,5 +139,13 @@
     <% if (theme.fontawesome.sharp_solid == true) { %>
         <%- renderCSS('fontawesome/sharp-solid.min.css') %>
     <% } %>
+    
+    <script>
+        const scrollToMain = ()=> {
+            console.log('scroll');
+            const target = document.querySelector('.main-content-container');
+            target.scrollIntoView({ behavior: 'smooth'});
+        }
+    </script>
 </head>
 
