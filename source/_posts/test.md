@@ -2,7 +2,7 @@
 title: test
 date: 2024-11-11 18:22:24
 tags: 测试标签
-categories: 测试分类
+categories: 测试分类 
 thumbnail: https://w.wallhaven.cc/full/3l/wallhaven-3lv8j6.jpg
 typora-root-url: ./..
 ---

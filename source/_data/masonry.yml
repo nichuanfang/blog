@@ -1,3 +1,11 @@
 - image: https://picsum.photos/id/12/2500/1800
   title: Lorem ipsum
   description: Lorem ipsum dolor sit amet
+
+- image: /images/test/wallhaven-9dp3y1-20241111185216243.jpg
+  title: beauty
+  description: Beautiful Girl
+
+- image: https://w.wallhaven.cc/full/3l/wallhaven-3lv8j6.jpg
+  title: sea
+  description: sea
