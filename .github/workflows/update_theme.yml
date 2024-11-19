@@ -22,6 +22,6 @@ jobs:
         uses: rshop/trigger-workflow-action@v1
         with:
           token: ${{ secrets.GH_TOKEN }}
-          repository: 'nichuanfang/hexo-blog'
+          repository: 'nichuanfang/blog'
           workflowId: 56880669
           branch: main
