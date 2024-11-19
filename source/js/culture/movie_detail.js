@@ -22,10 +22,10 @@ $(document).ready(function () {
         // 获取window.location.search中的tmdb_id
         const tmdb_id = new URLSearchParams(window.location.search).get('tmdb_id');
 
-        // 从https://api.jaychou.site/trakt/movie/{tmdb_id}获取数据
+        // 从https://api.chuanfang.org/trakt/movie/{tmdb_id}获取数据
         let movieData = {};
         $.ajax({
-            url: `https://api.jaychou.site/trakt/movie/${tmdb_id}`,
+            url: `https://api.chuanfang.org/trakt/movie/${tmdb_id}`,
             type: 'GET',
             dataType: 'json',
             async: false,
@@ -160,7 +160,7 @@ $(document).ready(function () {
                     input.focus();
                 } else {
                     $.ajax({
-                        url: 'https://api.jaychou.site/trakt/update_movie_share_link',
+                        url: 'https://api.chuanfang.org/trakt/update_movie_share_link',
                         type: 'POST',
                         dataType: 'json',
                         data: {

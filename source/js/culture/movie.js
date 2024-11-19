@@ -4,7 +4,7 @@ $(document).ready(function () {
         const scrollThreshold = 200;
         let currentPage = 1;
         const itemsPerPage = 12;
-        const jsonSrc = 'https://api.jaychou.site/trakt/movie';
+        const jsonSrc = 'https://api.chuanfang.org/trakt/movie';
         const coverSrc = 'https://image.tmdb.org/t/p/w116_and_h174_face';
         let init_data = sessionStorage.getItem('movie_init_data') || '';
         let data_ended = false;
