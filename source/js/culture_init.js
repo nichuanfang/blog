@@ -4,11 +4,11 @@
 // 如果当前是culture/*页面 才执行以下代码
 if (window.location.pathname == "/" || window.location.pathname == "/culture/") {
     const movieDataPromise = !sessionStorage.getItem("movie_init_data") ?
-        fetch("https://api.jaychou.site/trakt/movie?page=1&page_size=12").then(t => t.json()) :
+        fetch("https://api.chuanfang.org/trakt/movie?page=1&page_size=12").then(t => t.json()) :
         Promise.resolve(null);
 
     const showDataPromise = !sessionStorage.getItem("show_init_data") ?
-        fetch("https://api.jaychou.site/trakt/show?page=1&page_size=12").then(t => t.json()) :
+        fetch("https://api.chuanfang.org/trakt/show?page=1&page_size=12").then(t => t.json()) :
         Promise.resolve(null);
 
     Promise.all([movieDataPromise, showDataPromise])
