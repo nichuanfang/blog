@@ -68,7 +68,7 @@ jobs:
       #     author_email: 'github-actions[bot]@users.noreply.github.com'
       #     author_name: 'github-actions[bot]'
       #     message: '🐳 chore: 更新hexo-blog文档图片'
-      #     repository: nichuanfang/hexo-blog
+      #     repository: nichuanfang/blog
 
       # 处理main分支的文档和图片
       - name: transform 'main' branch
@@ -227,7 +227,7 @@ jobs:
           author_email: 'github-actions[bot]@users.noreply.github.com'
           author_name: 'github-actions[bot]'
           message: '🐳 chore: 更新hexo-blog-fluid主题文件'
-          repository: nichuanfang/hexo-blog
+          repository: nichuanfang/blog
 
       - name: 部署到github
         uses: peaceiris/actions-gh-pages@v3
@@ -261,5 +261,5 @@ jobs:
           branch: 'main'
           author_email: 'github-actions[bot]@users.noreply.github.com'
           author_name: 'github-actions[bot]'
-          message: '🐳 chore: 更新hexo-blog文章图片'
-          repository: nichuanfang/hexo-blog
+          message: '🐳 chore: 更新blog文章图片'
+          repository: nichuanfang/blog
