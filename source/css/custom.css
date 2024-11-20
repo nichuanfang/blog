@@ -1,0 +1,93 @@
+/* 暗中观察 */
+/* @font-face {
+    font-family: "LXGW WenKai Screen R";
+    src: url("../fonts/LXGWWenKaiScreenR.woff2") format("truetype");
+    font-weight: 400;
+} */
+
+#background-image {
+    position: fixed;
+    bottom: 280px;
+    z-index: 4;
+}
+
+/* 表格中的偶数行具有背景色 */
+[data-user-color-scheme="dark"] table tr:nth-child(even) td {
+    background-color: rgba(27, 31, 35, 0.5);
+}
+
+[data-user-color-scheme="light"] table tr:nth-child(even) td {
+    background-color: rgba(27, 31, 35, 0.05);
+}
+
+/* 表格中标题栏背景色和文字颜色 */
+[data-user-color-scheme="dark"] table th {
+    background-color: #1589e9;
+    color: #fff;
+}
+
+[data-user-color-scheme="light"] table th {
+    background-color: #0366d6;
+    color: #fff;
+}
+
+/* 超链接默认启用下划线，鼠标悬停下划线消失 */
+.markdown-body a {
+    text-decoration: underline;
+}
+
+.markdown-body a:hover {
+    text-decoration: none;
+}
+
+.banner .mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    background: url(/img/bg/overlay_dot_ptn_0.6.png);
+}
+
+/* 块引用样式 */
+.markdown-body blockquote {
+    color: var(--post-text-color);
+    padding: 1rem 1.45rem 1.25rem 1.45rem;
+    border: 1px double rgba(0, 0, 0, .1);
+    background-color: rgba(27, 31, 35, 0.05);
+    border-radius: 0.25rem;
+    margin: 1.8rem 0;
+}
+
+[data-user-color-scheme="dark"] .markdown-body blockquote {
+    border: 1px double rgb(128 128 128 / 30%);
+    background-color: rgba(62, 75, 94, 0.35);
+}
+
+/* 排版 */
+.markdown-body {
+    line-height: 1.9rem;
+    margin-bottom: 2rem;
+}
+
+.markdown-body p {
+    margin-bottom: 10px;
+}
+
+.markdown-body .highlight {
+    margin-bottom: 28px;
+}
+
+figure {
+    margin: 1.5rem 0;
+}
+
+.markdown-body p>img,
+.markdown-body p>a>img,
+.markdown-body figure>img,
+.markdown-body figure>a>img {
+    margin: 2rem auto;
+}
+
+.note {
+    padding: 0.85rem 1.1rem 0.85rem 1.1rem;
+}
