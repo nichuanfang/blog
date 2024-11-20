@@ -1029,7 +1029,7 @@ i.iconfont {
   --scrollbar-hover-color: #a6a6a6;
   --button-bg-color: transparent;
   --button-hover-bg-color: #f2f3f5;
-  --highlight-bg-color: #FFF;
+  --highlight-bg-color: #f8f9fa;
   --inlinecode-bg-color: #f9f2f4;
 }
 
@@ -1057,7 +1057,7 @@ i.iconfont {
     --scrollbar-hover-color: #9da8b3;
     --button-bg-color: transparent;
     --button-hover-bg-color: #46647e;
-    --highlight-bg-color: #FFF;
+    --highlight-bg-color: #f8f9fa;
     --inlinecode-bg-color: rgba(24, 28, 39, 0.4);
   }
 
