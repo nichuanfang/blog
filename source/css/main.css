@@ -957,7 +957,7 @@ body a:hover {
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
-code {
+pre code {
   color: var(--code-color);
 }
 
