@@ -69,10 +69,10 @@
       return schema;
     }
     // 默认优先按 prefers-color-scheme
-    schema = getSchemaFromCSSMediaQuery();
-    if (validColorSchemaKeys[schema]) {
-      return schema;
-    }
+    // schema = getSchemaFromCSSMediaQuery();
+    // if (validColorSchemaKeys[schema]) {
+    //   return schema;
+    // }
     // 否则按本地时间是否大于 18 点或凌晨 0 ~ 6 点
     var hours = new Date().getHours();
     if (hours >= 18 || (hours >= 0 && hours <= 6)) {
@@ -282,5 +282,5 @@
   Fluid.utils.waitElementLoaded(iframeSelector, function() {
     applyCustomColorSchemaSettings();
   });
-  
+
 })(window, document);
