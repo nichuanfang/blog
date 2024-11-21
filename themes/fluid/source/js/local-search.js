@@ -30,7 +30,7 @@
     // 如果当前页面是其他 加载local_search.xml的索引数据
     if (window.location.pathname.indexOf("/culture/movies") !== -1) {
       jQuery.ajax({
-        url: "https://api.jaychou.site/trakt/index",
+        url: "https://api.chuanfang.org/trakt/index",
         dataType: "json",
         success: function (data) {
           var movie_base64_data = data.data.movie;
@@ -51,7 +51,7 @@
       });
     } else if (window.location.pathname.indexOf("/culture/shows") !== -1) {
       jQuery.ajax({
-        url: "https://api.jaychou.site/trakt/index",
+        url: "https://api.chuanfang.org/trakt/index",
         dataType: "json",
         success: function (data) {
           var show_base64_data = data.data.show;
@@ -72,7 +72,7 @@
       });
     } else if (window.location.pathname.indexOf("/culture/") !== -1) {
       jQuery.ajax({
-        url: "https://api.jaychou.site/trakt/index",
+        url: "https://api.chuanfang.org/trakt/index",
         dataType: "json",
         success: function (data) {
           var movie_base64_data = data.data.movie;
