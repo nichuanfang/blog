@@ -136,7 +136,7 @@ dark_mode:
   default: auto
 
 # 主题颜色配置，其他不生效的地方请使用自定义 css 解决，配色可以在下方链接中获得启发
-# Theme color, please use custom CSS to solve other colors, color schema can be inspired by the links below
+# Theme color,  please use custom CSS to solve other colors, color schema can be inspired by the links below
 # See: https://www.webdesignrankings.com/resources/lolcolors/
 color:
   # body 背景色
