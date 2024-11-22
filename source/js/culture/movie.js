@@ -1,3 +1,5 @@
+/* global Fluid */
+
 $(document).ready(function () {
     if (document.querySelector('.movie-culture-list')) {
         const scrollInterval = 300;
@@ -154,6 +156,34 @@ $(document).ready(function () {
                     if (!data_ended) fetchData(currentPage, itemsPerPage);
                 }, scrollInterval);
             }
+        });
+
+        // 使用 MutationObserver 监听内容变化
+        const observer = new MutationObserver(() => {
+            // 检查是否需要恢复滚动位置
+            const scrollData = sessionStorage.getItem('fluid_scroll_position');
+            if (scrollData) {
+                const { position } = JSON.parse(scrollData);
+                if (document.documentElement.scrollHeight > position) {
+                    window.scrollTo(0, position);
+                    sessionStorage.removeItem('fluid_scroll_position');
+                }
+            }
+        });
+
+        // 观察电影列表容器的变化
+        observer.observe(cultureList, {
+            childList: true,
+            subtree: true
+        });
+
+        // 页面卸载前保存滚动位置
+        window.addEventListener('beforeunload', () => {
+            const scrollData = {
+                position: window.scrollY,
+                timestamp: Date.now()
+            };
+            sessionStorage.setItem('fluid_scroll_position', JSON.stringify(scrollData));
         });
     }
 });

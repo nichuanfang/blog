@@ -14,3 +14,7 @@ js(theme.custom_js) %> <% } %>
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
 <%- js_ex(theme.static_prefix.internal_js, 'boot.js') %>
+
+<% if (is_category()) { %>
+  <%- js_ex(theme.static_prefix.internal_js, 'category-state.js') %>
+<% } %>
