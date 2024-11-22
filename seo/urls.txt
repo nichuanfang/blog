@@ -6,8 +6,8 @@ https://blog.chuanfang.org/culture/movies/
 https://blog.chuanfang.org/culture/music/
 https://blog.chuanfang.org/culture/shows/
 https://blog.chuanfang.org/culture/variety-show/
-https://blog.chuanfang.org/culture/movies/detail/
 https://blog.chuanfang.org/culture/shows/detail/
+https://blog.chuanfang.org/culture/movies/detail/
 https://blog.chuanfang.org/2024/09/12/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%87%8D%E8%A6%81%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/
 https://blog.chuanfang.org/2024/07/05/%E9%80%86%E5%90%91%E5%BF%83%E5%BE%97/
 https://blog.chuanfang.org/2023/12/02/music-tool-kit%E5%B7%A5%E5%85%B7/
@@ -30,8 +30,8 @@ https://blog.chuanfang.org/tags/music/
 https://blog.chuanfang.org/tags/youtube/
 https://blog.chuanfang.org/tags/python/
 https://blog.chuanfang.org/tags/windows/
-https://blog.chuanfang.org/tags/%E8%AE%BE%E8%AE%A1/
 https://blog.chuanfang.org/tags/vercel/
+https://blog.chuanfang.org/tags/%E8%AE%BE%E8%AE%A1/
 https://blog.chuanfang.org/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/
 https://blog.chuanfang.org/tags/%E9%80%86%E5%90%91/
 https://blog.chuanfang.org/categories/%E6%8A%80%E6%9C%AF/
