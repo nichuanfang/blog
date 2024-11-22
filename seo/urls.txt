@@ -1,13 +1,13 @@
+https://blog.chuanfang.org/about/
 https://blog.chuanfang.org/culture/
 https://blog.chuanfang.org/culture/books/
 https://blog.chuanfang.org/culture/documentaries/
 https://blog.chuanfang.org/culture/movies/
 https://blog.chuanfang.org/culture/music/
-https://blog.chuanfang.org/culture/shows/
 https://blog.chuanfang.org/culture/variety-show/
+https://blog.chuanfang.org/culture/shows/
 https://blog.chuanfang.org/culture/movies/detail/
 https://blog.chuanfang.org/culture/shows/detail/
-https://blog.chuanfang.org/about/
 https://blog.chuanfang.org/2024/09/12/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%87%8D%E8%A6%81%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/
 https://blog.chuanfang.org/2024/07/05/%E9%80%86%E5%90%91%E5%BF%83%E5%BE%97/
 https://blog.chuanfang.org/2023/12/02/music-tool-kit%E5%B7%A5%E5%85%B7/
@@ -24,10 +24,10 @@ https://blog.chuanfang.org/
 https://blog.chuanfang.org/tags/GithubActions/
 https://blog.chuanfang.org/tags/hexo%E4%B8%BB%E9%A2%98/
 https://blog.chuanfang.org/tags/test/
+https://blog.chuanfang.org/tags/go/
 https://blog.chuanfang.org/tags/tools/
 https://blog.chuanfang.org/tags/music/
 https://blog.chuanfang.org/tags/youtube/
-https://blog.chuanfang.org/tags/go/
 https://blog.chuanfang.org/tags/python/
 https://blog.chuanfang.org/tags/windows/
 https://blog.chuanfang.org/tags/%E8%AE%BE%E8%AE%A1/
