@@ -8,6 +8,20 @@ Fluid.utils = {
     var dbc = new Debouncer(callback);
     window.addEventListener('scroll', dbc, false);
     dbc.handleEvent();
+
+    // 在滚动时保存位置
+    var savePosition = new Debouncer(() => {
+      const scrollData = {
+        position: window.scrollY,
+        timestamp: Date.now()
+      };
+      localStorage.setItem(
+        `fluid_scroll_${window.location.pathname}`,
+        JSON.stringify(scrollData)
+      );
+    });
+    window.addEventListener('scroll', savePosition, false);
+
     return dbc;
   },
 
@@ -16,21 +30,69 @@ Fluid.utils = {
   },
 
   listenDOMLoaded(callback) {
-    if (document.readyState !== 'loading') {
+    const wrappedCallback = () => {
+      // 先恢复滚动位置
+      const key = `fluid_scroll_${window.location.pathname}`;
+      const scrollStr = localStorage.getItem(key);
+
+      if (scrollStr) {
+        try {
+          const scrollData = JSON.parse(scrollStr);
+          // 检查数据是否在24小时内
+          if (Date.now() - scrollData.timestamp < 24 * 60 * 60 * 1000) {
+            // 使用 scrollToElement 方法恢复位置
+            this.scrollToElement('body', scrollData.position);
+          } else {
+            localStorage.removeItem(key);
+          }
+        } catch (e) {
+          localStorage.removeItem(key);
+        }
+      }
+
+      // 然后执行原有的回调
       callback();
+    };
+
+    if (document.readyState !== 'loading') {
+      wrappedCallback();
     } else {
-      document.addEventListener('DOMContentLoaded', function () {
-        callback();
-      });
+      document.addEventListener('DOMContentLoaded', wrappedCallback);
     }
   },
 
   scrollToElement: function(target, offset) {
+    // 如果 offset 是数字，直接滚动到指定位置
+    if (typeof offset === 'number') {
+      window.scrollTo({
+        top: offset,
+        behavior: 'auto'
+      });
+
+      // 使用 requestAnimationFrame 确保滚动位置正确
+      requestAnimationFrame(() => {
+        window.scrollTo({
+          top: offset,
+          behavior: 'auto'
+        });
+
+        // 额外的延迟滚动以处理动态内容
+        setTimeout(() => {
+          window.scrollTo({
+            top: offset,
+            behavior: 'auto'
+          });
+        }, 150);
+      });
+      return;
+    }
+
+    // 原有的滚动到元素逻辑
     var of = jQuery(target).offset();
     if (of) {
       jQuery('html,body').animate({
         scrollTop: of.top + (offset || 0),
-        easing   : 'swing'
+        easing: 'swing'
       });
     }
   },
@@ -199,122 +261,6 @@ Fluid.utils = {
       }
     };
     setTimeout(next, interval);
-  },
-
-  /**
-   * 滚动位置记忆管理器
-   */
-  scrollMemoryManager: {
-    /**
-     * 获取当前页面的存储键名
-     * @returns {string}
-     */
-    getStorageKey() {
-      return `fluid_scroll_${window.location.pathname}`;
-    },
-
-    /**
-     * 保存当前页面的滚动位置
-     */
-    saveScrollPosition() {
-      const scrollData = {
-        position: window.scrollY,
-        timestamp: Date.now()
-      };
-      localStorage.setItem(
-        this.getStorageKey(),
-        JSON.stringify(scrollData)
-      );
-    },
-
-    /**
-     * 恢复页面的滚动位置
-     */
-    restoreScrollPosition() {
-      const key = this.getStorageKey();
-      const scrollStr = localStorage.getItem(key);
-
-      if (!scrollStr) return;
-
-      try {
-        const scrollData = JSON.parse(scrollStr);
-        // 检查数据是否在24小时内
-        if (Date.now() - scrollData.timestamp < 24 * 60 * 60 * 1000) {
-          this.scrollToPosition(scrollData.position);
-        } else {
-          // 清除过期数据
-          localStorage.removeItem(key);
-        }
-      } catch (e) {
-        localStorage.removeItem(key);
-      }
-    },
-
-    /**
-     * 滚动到指定位置
-     * @param {number} position - 目标滚动位置
-     */
-    scrollToPosition(position) {
-      if (typeof position !== 'number') return;
-
-      // 立即滚动
-      window.scrollTo(0, position);
-
-      // 使用 requestAnimationFrame 确保在下一帧渲染时滚动
-      requestAnimationFrame(() => {
-        window.scrollTo(0, position);
-
-        // 额外的延迟滚动以处理动态内容
-        setTimeout(() => {
-          window.scrollTo({
-            top: position,
-            behavior: 'auto'
-          });
-        }, 150);
-      });
-    },
-
-    /**
-     * 清理过期的滚动位置数据
-     */
-    cleanupScrollData() {
-      const keys = Object.keys(localStorage);
-      const scrollKeys = keys.filter(key => key.startsWith('fluid_scroll_'));
-      const now = Date.now();
-      const expireTime = 24 * 60 * 60 * 1000; // 24小时过期
-
-      scrollKeys.forEach(key => {
-        try {
-          const data = JSON.parse(localStorage.getItem(key));
-          if (now - data.timestamp > expireTime) {
-            localStorage.removeItem(key);
-          }
-        } catch (e) {
-          localStorage.removeItem(key);
-        }
-      });
-    },
-
-    /**
-     * 初始化滚动位置记忆功能
-     */
-    init() {
-      // 页面加载完成后恢复滚动位置
-      Fluid.utils.listenDOMLoaded(() => {
-        this.restoreScrollPosition();
-        this.cleanupScrollData();
-      });
-
-      // 页面卸载前保存滚动位置
-      window.addEventListener('beforeunload', () => {
-        this.saveScrollPosition();
-      });
-
-      // 支持 pjax
-      document.addEventListener('pjax:complete', () => {
-        this.restoreScrollPosition();
-      });
-    }
   }
 
 };
@@ -360,5 +306,54 @@ Debouncer.prototype = {
   }
 };
 
-// 初始化滚动位置记忆功能
-Fluid.utils.scrollMemoryManager.init();
+
+// 在页面卸载前保存最后的滚动位置
+window.addEventListener('beforeunload', () => {
+  const scrollData = {
+    position: window.scrollY,
+    timestamp: Date.now()
+  };
+  localStorage.setItem(
+    `fluid_scroll_${window.location.pathname}`,
+    JSON.stringify(scrollData)
+  );
+});
+
+// 支持 pjax
+document.addEventListener('pjax:complete', () => {
+  const key = `fluid_scroll_${window.location.pathname}`;
+  const scrollStr = localStorage.getItem(key);
+
+  if (scrollStr) {
+    try {
+      const scrollData = JSON.parse(scrollStr);
+      if (Date.now() - scrollData.timestamp < 24 * 60 * 60 * 1000) {
+        Fluid.utils.scrollToElement('body', scrollData.position);
+      }
+    } catch (e) {
+      localStorage.removeItem(key);
+    }
+  }
+});
+
+// 定期清理过期的滚动位置数据
+function cleanupScrollData() {
+  const keys = Object.keys(localStorage);
+  const scrollKeys = keys.filter(key => key.startsWith('fluid_scroll_'));
+  const now = Date.now();
+  const expireTime = 24 * 60 * 60 * 1000; // 24小时过期
+
+  scrollKeys.forEach(key => {
+    try {
+      const data = JSON.parse(localStorage.getItem(key));
+      if (now - data.timestamp > expireTime) {
+        localStorage.removeItem(key);
+      }
+    } catch (e) {
+      localStorage.removeItem(key);
+    }
+  });
+}
+
+// 每天执行一次清理
+setInterval(cleanupScrollData, 24 * 60 * 60 * 1000);
