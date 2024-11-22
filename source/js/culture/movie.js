@@ -38,23 +38,19 @@ $(document).ready(function () {
             ];
         }
 
-        // 在 fetchData 函数中，数据加载完成后触发事件
         function fetchData(page, pageSize) {
-          fetch(`${jsonSrc}?page=${page}&page_size=${pageSize}`)
-            .then(response => response.json())
-            .then(data => {
-              if (data['data']['data'].length === 0) {
-                hideLoadingAnimation();
-                data_ended = true;
-              } else {
-                generateMovieElements(data, coverSrc);
-                hideLoadingAnimation();
-
-                // 触发自定义事件，表示内容已加载
-                window.dispatchEvent(new CustomEvent('contentLoaded'));
-              }
-            })
-            .catch(error => console.error('Error:', error));
+            fetch(`${jsonSrc}?page=${page}&page_size=${pageSize}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data['data']['data'].length === 0) {
+                        hideLoadingAnimation();
+                        data_ended = true;
+                    } else {
+                        generateMovieElements(data, coverSrc);
+                        hideLoadingAnimation();
+                    }
+                })
+                .catch(error => console.error('Error:', error));
         }
 
         function generateMovieElements(data, coverSrc) {
@@ -161,4 +157,3 @@ $(document).ready(function () {
         });
     }
 });
-
