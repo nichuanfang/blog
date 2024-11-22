@@ -29,38 +29,19 @@ Fluid.utils = {
     window.removeEventListener('scroll', callback);
   },
 
-  // 修改 listenDOMLoaded 函数中的恢复滚动位置逻辑
   listenDOMLoaded(callback) {
     const wrappedCallback = () => {
+      // 先恢复滚动位置
       const key = `fluid_scroll_${window.location.pathname}`;
       const scrollStr = localStorage.getItem(key);
 
       if (scrollStr) {
         try {
           const scrollData = JSON.parse(scrollStr);
+          // 检查数据是否在24小时内
           if (Date.now() - scrollData.timestamp < 24 * 60 * 60 * 1000) {
-            // 1. 先设置一个最小高度，确保有足够的滚动空间
-            document.body.style.minHeight = `${scrollData.position + window.innerHeight}px`;
-
-            // 2. 立即滚动到保存的位置
+            // 使用 scrollToElement 方法恢复位置
             this.scrollToElement('body', scrollData.position);
-
-            // 3. 等待内容加载后再次尝试滚动
-            const checkAndScroll = () => {
-              // 如果当前页面高度小于保存的滚动位置，说明内容还在加载
-              if (document.documentElement.scrollHeight <= scrollData.position + window.innerHeight) {
-                // 200ms 后再次检查
-                setTimeout(checkAndScroll, 200);
-              } else {
-                // 内容加载完成，移除临时设置的最小高度
-                document.body.style.minHeight = '';
-                // 最后一次滚动到正确位置
-                this.scrollToElement('body', scrollData.position);
-              }
-            };
-
-            // 启动检查
-            setTimeout(checkAndScroll, 200);
           } else {
             localStorage.removeItem(key);
           }
@@ -69,6 +50,7 @@ Fluid.utils = {
         }
       }
 
+      // 然后执行原有的回调
       callback();
     };
 
