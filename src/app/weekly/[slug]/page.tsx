@@ -1,6 +1,7 @@
 import ArtalkComment from '@/components/ArtalkComment'
 import EditLink from '@/components/EditLink'
 import PageContainer from '@/components/PageContainer'
+import ScrollToTop from '@/components/ScrollToTop'
 import Cover from '@/components/article/Cover'
 import DateAndReadingTime from '@/components/article/DateAndReadingTime'
 import Description from '@/components/article/Description'
@@ -32,6 +33,7 @@ export default async function Weekly(props: { params: Promise<{ slug: string }> 
         <EditLink filePath={`content/weeklies/${params.slug}.md`} />
         <ArtalkComment pageKey={`/weekly/${frontMatter.slug}`} pageTitle={frontMatter.title} />
       </div>
+      <ScrollToTop />
     </PageContainer>
   )
 }

@@ -1,5 +1,6 @@
 import PageContainer from '@/components/PageContainer'
 import PostCard from '@/components/PostCard'
+import ScrollToTop from '@/components/ScrollToTop'
 import { getBlogFrontMatterList } from '@/lib/blog'
 
 export default function Blog() {
@@ -18,6 +19,7 @@ export default function Blog() {
             <PostCard key={frontMatter.slug} frontMatter={frontMatter} />
           ))}
         </div>
+        <ScrollToTop />
       </PageContainer>
     </main>
   )

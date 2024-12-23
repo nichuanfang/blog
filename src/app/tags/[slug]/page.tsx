@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import PageContainer from '@/components/PageContainer'
+import ScrollToTop from '@/components/ScrollToTop'
 import { getPostsByTag, getTagsList } from '@/lib/tags'
 
 const dateFormatter = new Intl.DateTimeFormat('zh-CN', {
@@ -56,6 +57,7 @@ export default async function Tag({ params }: { params: Promise<{ slug: string }
 
         {posts.length === 0 && <p className="py-8 text-center text-gray-500">没有找到相关文章</p>}
       </div>
+      <ScrollToTop />
     </PageContainer>
   )
 }
