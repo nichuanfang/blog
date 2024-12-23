@@ -17,7 +17,7 @@ GitLab CI/CD 是 GitLab 提供的持续集成和持续部署服务，可以帮�
 
 CI 指的是持续集成（Continuous Integration），CD 指的是持续部署（Continuous Deployment）或持续交付（Continuous Delivery）。
 
-![](https://pocket.haydenhayden.com/blog/202406061545434.png?x-oss-process=image/resize,w_1000,m_lfit)
+![](https://photo.chuanfang.org/api/v1/t/cae2d336758d19c9c20c3cac1625556ebb08c183/2aqbem44/fit_1280)
 
 > **持续集成**是指频繁地将代码集成到主干分支中，并通过自动化的测试来验证每次集成。其目的是尽早发现集成问题，减少集成过程中的冲突和错误。
 >
@@ -37,7 +37,7 @@ Stage 又由 Job 组成，**Job** 是 Pipeline 的最小执行单元，它定义
 
 而 **Runner** 是 GitLab CI/CD 的执行者，它负责执行 Job 中定义的任务，Runner 可以是 GitLab 提供的共享 Runner，也可以是用户自己搭建的私有 Runner。
 
-![](https://pocket.haydenhayden.com/blog/202406061557825.png?x-oss-process=image/resize,w_1000,m_lfit)
+![](https://photo.chuanfang.org/api/v1/t/a1dc43ba94dff2f9e45c0735bb194ea61df3d67b/2aqbem44/fit_1280)
 
 ### 执行顺序
 
@@ -107,7 +107,7 @@ test:
 
 对于一些需要保密的信息，如密码、密钥等，可以通过 GitLab Web 界面设置环境变量，然后在 `.gitlab-ci.yml` 中使用。
 
-![](https://pocket.haydenhayden.com/blog/202406061616304.png?x-oss-process=image/resize,w_1000,m_lfit)
+![](https://photo.chuanfang.org/api/v1/t/8d6c8f963d2264604fdd0e5494d2f7f7c4233698/2aqbem44/fit_1280)
 
 ```yaml{5}
 test:
