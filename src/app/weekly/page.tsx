@@ -1,6 +1,7 @@
 import { IconNews } from '@tabler/icons-react'
 
 import PageContainer from '@/components/PageContainer'
+import ScrollToTop from '@/components/ScrollToTop'
 import WeeklyCard from '@/components/WeeklyCard'
 import { getWeeklyGroupByYear } from '@/lib/weekly'
 
@@ -14,7 +15,10 @@ export default function Posts() {
         <div className="m-auto my-16 flex max-w-[450px] flex-col gap-6 md:max-w-[800px]">
           {weeklyFrontMatterList.map(({ year, weeklies }) => (
             <div key={year}>
-              <h2 className="sticky top-0 z-10 flex items-center bg-background text-5xl font-semibold text-colorful-200 text-opacity-40 md:text-6xl dark:text-colorful-400 dark:text-opacity-20">
+              <h2
+                className="sticky top-0 z-10 flex items-center bg-background text-5xl font-semibold text-colorful-200 text-opacity-40
+                  dark:text-colorful-400 dark:text-opacity-20 md:text-6xl"
+              >
                 <IconNews className="mr-2 size-16 opacity-50" />
                 {year}
               </h2>
@@ -26,6 +30,7 @@ export default function Posts() {
             </div>
           ))}
         </div>
+        <ScrollToTop />
       </PageContainer>
     </main>
   )
