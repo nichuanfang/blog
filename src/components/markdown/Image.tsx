@@ -46,7 +46,7 @@ const Image = ({ src = '', alt = '', ...props }: { src?: string; alt?: string })
 function getThumbnailUrl(src: string): string {
   const url = new URL(src)
   // 如果是 oss 图片才进行缩略图处理
-  if (url.host !== 'pocket.haydenhayden.com') return src
+  if (url.host !== 'photo.chuanfang.org') return src
 
   const process = 'image/resize,w_20,m_lfit/blur,r_30,s_2'
   url.searchParams.set('x-oss-process', process)

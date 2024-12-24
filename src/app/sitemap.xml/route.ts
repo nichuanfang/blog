@@ -19,6 +19,12 @@ const STATIC_MAP = [
     changeFrequency: 'weekly',
   },
   {
+    url: getUrl('/tags').href,
+    lastModified: new Date(),
+    priority: 1.0,
+    changeFrequency: 'weekly',
+  },
+  {
     url: getUrl('/weekly').href,
     lastModified: new Date(),
     priority: 1.0,

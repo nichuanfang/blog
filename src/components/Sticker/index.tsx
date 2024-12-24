@@ -92,97 +92,97 @@ function generateRandomPosition() {
 }
 const STICKERS = [
   {
-    url: 'stickers/202404291539705.png',
+    url: 'https://blog.chuanfang.org/stickers/202404291539705.png',
   },
   {
-    url: 'stickers/202404291612491.png',
+    url: 'https://blog.chuanfang.org/stickers/202404291612491.png',
   },
   {
-    url: 'stickers/202404291612489.png',
+    url: 'https://blog.chuanfang.org/stickers/202404291612489.png',
   },
   {
-    url: 'stickers/202404291612488.png',
+    url: 'https://blog.chuanfang.org/stickers/202404291612488.png',
   },
   {
-    url: 'stickers/202404291615348.png',
+    url: 'https://blog.chuanfang.org/stickers/202404291615348.png',
   },
   {
-    url: 'stickers/202404291615349.png',
+    url: 'https://blog.chuanfang.org/stickers/202404291615349.png',
   },
   {
-    url: 'stickers/202404291615350.png',
+    url: 'https://blog.chuanfang.org/stickers/202404291615350.png',
   },
   {
-    url: 'stickers/202404291615351.png',
+    url: 'https://blog.chuanfang.org/stickers/202404291615351.png',
   },
   {
-    url: 'stickers/202404291615352.png',
+    url: 'https://blog.chuanfang.org/stickers/202404291615352.png',
   },
   {
-    url: 'stickers/202404291615353.png',
+    url: 'https://blog.chuanfang.org/stickers/202404291615353.png',
   },
   {
-    url: 'stickers/202404291617907.png',
+    url: 'https://blog.chuanfang.org/stickers/202404291617907.png',
   },
   {
-    url: 'stickers/202404291617908.png',
+    url: 'https://blog.chuanfang.org/stickers/202404291617908.png',
   },
   {
-    url: 'stickers/202404291617909.png',
+    url: 'https://blog.chuanfang.org/stickers/202404291617909.png',
   },
   {
-    url: 'stickers/202404291617910.png',
+    url: 'https://blog.chuanfang.org/stickers/202404291617910.png',
   },
   {
-    url: 'stickers/202404291617911.png',
+    url: 'https://blog.chuanfang.org/stickers/202404291617911.png',
   },
   {
-    url: 'stickers/202404291617912.png',
+    url: 'https://blog.chuanfang.org/stickers/202404291617912.png',
   },
   {
-    url: 'stickers/202404292046720.png',
+    url: 'https://blog.chuanfang.org/stickers/202404292046720.png',
   },
   {
-    url: 'stickers/202404292046721.png',
+    url: 'https://blog.chuanfang.org/stickers/202404292046721.png',
   },
   {
-    url: 'stickers/202404292046722.png',
+    url: 'https://blog.chuanfang.org/stickers/202404292046722.png',
   },
   {
-    url: 'stickers/202404292046723.png',
+    url: 'https://blog.chuanfang.org/stickers/202404292046723.png',
   },
   {
-    url: 'stickers/202404292046724.png',
+    url: 'https://blog.chuanfang.org/stickers/202404292046724.png',
   },
   {
-    url: 'stickers/202404292046725.png',
+    url: 'https://blog.chuanfang.org/stickers/202404292046725.png',
   },
   {
-    url: 'stickers/202404292048095.png',
+    url: 'https://blog.chuanfang.org/stickers/202404292048095.png',
   },
   {
-    url: 'stickers/202404292048096.png',
+    url: 'https://blog.chuanfang.org/stickers/202404292048096.png',
   },
   {
-    url: 'stickers/202404292048097.png',
+    url: 'https://blog.chuanfang.org/stickers/202404292048097.png',
   },
   {
-    url: 'stickers/202404292048098.png',
+    url: 'https://blog.chuanfang.org/stickers/202404292048098.png',
   },
   {
-    url: 'stickers/202404292048099.png',
+    url: 'https://blog.chuanfang.org/stickers/202404292048099.png',
   },
   {
-    url: 'stickers/202404292048100.png',
+    url: 'https://blog.chuanfang.org/stickers/202404292048100.png',
   },
   {
-    url: 'stickers/202404292048101.png',
+    url: 'https://blog.chuanfang.org/stickers/202404292048101.png',
   },
   {
-    url: 'stickers/202404292048102.png',
+    url: 'https://blog.chuanfang.org/stickers/202404292048102.png',
   },
   {
-    url: 'stickers/202404292048103.png',
+    url: 'https://blog.chuanfang.org/stickers/202404292048103.png',
   },
 ]
 /** 随机选取8个贴纸  */
