@@ -14,9 +14,8 @@ export function getTagsList() {
     })
   })
 
-  return Object.entries(tagFrequency)
-    .map(([tag, weight]) => ({ tag, weight }))
-    .sort((a, b) => b.weight - a.weight)
+  return Object.entries(tagFrequency).map(([tag, weight]) => ({ tag, weight }))
+  // .sort((a, b) => b.weight - a.weight)
 }
 
 export function getPostsByTag(tag: string) {

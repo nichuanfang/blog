@@ -19,9 +19,12 @@ export default async function Tag({ params }: { params: Promise<{ slug: string }
   return (
     <PageContainer>
       <div className="mx-auto max-w-4xl px-4 py-8">
-        <h1 className="mb-8 text-3xl font-bold">
-          标签：&quot;{slug}&quot;
-          <span className="ml-2 text-xl text-gray-500">({posts.length} 篇文章)</span>
+        <h1 className="mb-8 text-4xl font-extrabold">
+          <span className="text-lg text-gray-500">标签：</span>
+          <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-3xl font-semibold text-transparent">
+            {slug}
+          </span>
+          <span className="ml-2 text-xl italic text-gray-600">（共 {posts.length} 篇文章）</span>
         </h1>
 
         <div className="space-y-8">
