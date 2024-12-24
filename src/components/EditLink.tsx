@@ -13,10 +13,11 @@ const EditLink = ({ filePath }: { filePath: string }) => {
   return (
     <div className="my-4 flex justify-end gap-6">
       <a
-        href={`https://github.com/haydenull/blog/blob/main/${filePath}`}
+        href={`https://github.com/nichuanfang/blog/blob/main/${filePath}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-1 text-base text-colorful-500 hover:text-colorful-700 dark:text-colorful-600 dark:hover:text-colorful-500"
+        className="flex items-center gap-1 text-base text-colorful-500 hover:text-colorful-700 dark:text-colorful-600
+          dark:hover:text-colorful-500"
       >
         <AkarIconsGithubFill /> Edit on Github
       </a>
@@ -24,7 +25,8 @@ const EditLink = ({ filePath }: { filePath: string }) => {
         href={`https://stackblitz.com/github/haydenull/blog/tree/main?file=${encodeURIComponent(filePath)}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-1 text-base text-colorful-500 hover:text-colorful-700 dark:text-colorful-600 dark:hover:text-colorful-500"
+        className="flex items-center gap-1 text-base text-colorful-500 hover:text-colorful-700 dark:text-colorful-600
+          dark:hover:text-colorful-500"
       >
         <SimpleIconsStackblitz /> Edit on StackBlitz
       </a>

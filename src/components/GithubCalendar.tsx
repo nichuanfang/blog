@@ -11,8 +11,8 @@ type Activity = {
   level: Level
 }
 const GithubCalendar = () => {
-  const { theme } = useTheme()
-  const _theme = theme === 'dark' ? 'dark' : 'light'
+  const { resolvedTheme } = useTheme()
+  const _theme = resolvedTheme === 'dark' ? 'dark' : 'light'
 
   const transformData = (data: Activity[]) => {
     const threeMonthsAgo = dayjs().subtract(3, 'months')
