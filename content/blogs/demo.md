@@ -78,3 +78,13 @@ export default nextConfig
 >
 > 有时候报错 需要重启macos
 
+调试配置仓库:
+
+以下都是必须的产品
+
+哈哈哈
+
+> [!IMPORTANT]
+>
+> 测试通过不通过关乎用户体验
+
