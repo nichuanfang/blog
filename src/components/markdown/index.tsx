@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import directive from 'remark-directive'
 import gfm from 'remark-gfm'
-
+// @ts-expect-error type correct
 import { throttle } from 'lodash'
 import { Component } from 'react'
 
