@@ -18,9 +18,44 @@ import remarkToc from './remarkPlugins/toc'
 
 const Markdown = ({ markdownText }: { markdownText: string }) => {
   let lastVisibleHeading = ''
+  let isScrollingByClick = false
 
   useEffect(() => {
+    // 点击事件处理
+    // @ts-expect-error 类型来自 remark
+    const handleTocClick = (event) => {
+      const targetToc = event.target
+      const tocs = document.querySelectorAll('.toc-item')
+
+      tocs.forEach((toc) => {
+        if (toc.id === targetToc.id) {
+          toc.classList.add('active-toc-item')
+        } else {
+          toc.classList.remove('active-toc-item')
+        }
+      })
+
+      // 滚动到对应的标题位置
+      const targetHeading = document.querySelector(`.items-center #${targetToc.id}`)
+      if (targetHeading) {
+        isScrollingByClick = true
+
+        targetHeading.scrollIntoView({
+          behavior: 'smooth', // 平滑滚动
+          block: 'start', // 滚动到元素的顶部
+        })
+
+        // 等待滚动完成后重置标志位
+        setTimeout(() => {
+          isScrollingByClick = false
+        }, 500)
+      }
+    }
+
+    // 滚动事件处理
     const handleScroll = () => {
+      if (isScrollingByClick) return
+
       const headings = document.querySelectorAll('h2, h3')
       const tocs = document.querySelectorAll('.toc-item')
       let currentVisibleHeading = ''
@@ -29,11 +64,11 @@ const Markdown = ({ markdownText }: { markdownText: string }) => {
         const rect = heading.getBoundingClientRect()
         if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
           currentVisibleHeading = heading.id
-          if (currentVisibleHeading != lastVisibleHeading) {
-            console.log('activeId: ' + currentVisibleHeading)
+          if (currentVisibleHeading !== lastVisibleHeading) {
             lastVisibleHeading = currentVisibleHeading
+
             tocs.forEach((toc) => {
-              // @ts-expect-error type correct
+              // @ts-expect-error 类型来自 remark
               if (toc.text === currentVisibleHeading) {
                 toc.classList.add('active-toc-item')
               } else {
@@ -45,8 +80,20 @@ const Markdown = ({ markdownText }: { markdownText: string }) => {
       })
     }
 
+    // 给 TOC 添加点击事件
+    const tocs = document.querySelectorAll('.toc-item')
+    tocs.forEach((toc) => {
+      toc.addEventListener('click', handleTocClick)
+    })
+
+    // 滚动事件监听
     window.addEventListener('scroll', handleScroll)
+
+    // 清理事件监听
     return () => {
+      tocs.forEach((toc) => {
+        toc.removeEventListener('click', handleTocClick)
+      })
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])

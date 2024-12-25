@@ -27,7 +27,7 @@ const remarkToc: Plugin = () => {
       children: headings.map((heading) => {
         return {
           type: 'link',
-          data: { hProperties: { className: `toc-item toc-h${heading.depth}` } }, // 根据标题深度添加类名
+          data: { hProperties: { className: `toc-item toc-h${heading.depth}`, id: slug(heading.value) } }, // 根据标题深度添加类名
           url: `#${slug(heading.value)}`,
           children: [{ type: 'text', value: heading.value }],
         }
