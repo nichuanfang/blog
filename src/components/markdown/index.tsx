@@ -1,3 +1,6 @@
+'use client'
+
+import { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import directive from 'remark-directive'
@@ -14,6 +17,40 @@ import remarkCallout from './remarkPlugins/callout'
 import remarkToc from './remarkPlugins/toc'
 
 const Markdown = ({ markdownText }: { markdownText: string }) => {
+  let lastVisibleHeading = ''
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const headings = document.querySelectorAll('h2, h3')
+      const tocs = document.querySelectorAll('.toc-item')
+      let currentVisibleHeading = ''
+
+      headings.forEach((heading) => {
+        const rect = heading.getBoundingClientRect()
+        if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
+          currentVisibleHeading = heading.id
+          if (currentVisibleHeading != lastVisibleHeading) {
+            console.log('activeId: ' + currentVisibleHeading)
+            lastVisibleHeading = currentVisibleHeading
+            tocs.forEach((toc) => {
+              // @ts-expect-error type correct
+              if (toc.text === currentVisibleHeading) {
+                toc.classList.add('active-toc-item')
+              } else {
+                toc.classList.remove('active-toc-item')
+              }
+            })
+          }
+        }
+      })
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return (
     <div className="relative">
       <ReactMarkdown

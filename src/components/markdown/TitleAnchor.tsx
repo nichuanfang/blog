@@ -20,9 +20,8 @@ const TitleAnchor = ({ title, level, ...props }: { title: React.ReactNode; level
   const _title = extractTextFromNode(title)
   const slugStr = slug(_title)
   const Tag = `h${level}` as keyof JSX.IntrinsicElements
-
   return (
-    <Tag {...props} className="group flex flex-wrap items-center">
+    <Tag {...props} className="group flex flex-wrap items-center" id={_title}>
       <a
         id={slugStr}
         href={`#${slugStr}`}
