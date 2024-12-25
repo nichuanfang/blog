@@ -60,7 +60,8 @@ const Markdown = ({ markdownText }: { markdownText: string }) => {
       const tocs = document.querySelectorAll('.toc-item')
       let currentVisibleHeading = ''
 
-      headings.forEach((heading) => {
+      // 使用 some 来替代 forEach
+      Array.prototype.some.call(headings, (heading) => {
         const rect = heading.getBoundingClientRect()
         if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
           currentVisibleHeading = heading.id
@@ -76,7 +77,9 @@ const Markdown = ({ markdownText }: { markdownText: string }) => {
               }
             })
           }
+          return true // 返回 true 来停止 some 的迭代
         }
+        return false // 返回 false 继续迭代
       })
     }
 
