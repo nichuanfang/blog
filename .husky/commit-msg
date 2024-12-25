@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
-# . "$(dirname -- "$0")/_/husky.sh"
+. "$(dirname -- "$0")/_/husky.sh"
 
-# npx haydenull-fabric verify-commit
+npx haydenull-fabric verify-commit

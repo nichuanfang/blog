@@ -222,25 +222,53 @@
   .toc-position-container {
     @apply fixed w-screen left-0 justify-center hidden bottom-14 pointer-events-none xl:flex;
   }
+
   .toc-position-container .toc-faker-content {
     @apply w-[864px] flex justify-end;
   }
+
   .toc-position-container .toc-faker-content .toc-container {
     @apply flex flex-col text-xs w-[240px] -mr-[250px] pointer-events-auto;
   }
+
   .toc-container a {
-    @apply text-xs line-clamp-1 text-zinc-400 hover:text-zinc-500 hover:no-underline dark:text-zinc-600 hover:dark:text-zinc-500;
+    @apply text-xs line-clamp-1 text-zinc-400 hover:text-zinc-500 hover:no-underline 
+          dark:text-zinc-600 hover:dark:text-zinc-500 outline-none focus:outline-none 
+          transition-all duration-200;
   }
+
   .toc-container a.toc-h2 {
     @apply font-medium mt-3;
   }
+
   .toc-container a.toc-h3 {
-    @apply flex items-center mt-2 gap-1 before:inline-block before:w-1 before:h-1 before:rounded-full before:bg-zinc-300 dark:before:bg-zinc-700;
+    @apply flex items-center mt-2 gap-1 before:inline-block before:w-1 before:h-1 
+          before:rounded-full before:bg-zinc-300 dark:before:bg-zinc-700;
   }
+
   .toc-container a::after {
     @apply hidden;
   }
-  /* ========= toc end ========= */
+
+  /* 活动状态样式 */
+  .active-toc-item {
+          @apply font-semibold text-colorful-500 dark:text-colorful-400  /* 使用你的主题色 */
+          border-l-2 border-colorful-500 dark:border-colorful-400
+          pl-2.5 -ml-2.5
+          transition-all duration-200
+          outline-none focus:outline-none; /* 移除outline */
+  }
+
+  /* 确保在点击和聚焦时没有outline */
+  .toc-container a:focus,
+  .toc-container a:active,
+  .toc-container a.active-toc-item:focus,
+  .toc-container a.active-toc-item:active {
+    @apply outline-none ring-0 shadow-none;
+  }
+    /* ========= toc end ========= */
+
+
 }
 
 /* 配合深色模式切换动画 */
@@ -299,13 +327,4 @@
 }
 .atk-list .atk-list-footer {
   @apply opacity-40 mt-2 md:mt-0;
-}
-
-.active-toc-item {
-  font-weight: bold;
-  color: #0070f3;
-  border-left: 3px solid #0070f3; /* 添加左边框以强调 */
-  padding-left: 10px; /* 增加内边距以适应边框 */
-  transition: background-color 0.3s ease, color 0.3s ease; /* 添加过渡效果 */
-  font-size: 1.1em; /* 略微增大字体 */
 }
