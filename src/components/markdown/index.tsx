@@ -6,7 +6,6 @@ import rehypeRaw from 'rehype-raw'
 import directive from 'remark-directive'
 import gfm from 'remark-gfm'
 
-// import remarkToc from 'remark-toc'
 import CodeBlock from '@/components/markdown/CodeBlock'
 import InlineCode from '@/components/markdown/InlineCode'
 import Link from '@/components/markdown/Link'
@@ -19,6 +18,7 @@ import remarkToc from './remarkPlugins/toc'
 const Markdown = ({ markdownText }: { markdownText: string }) => {
   let lastVisibleHeading = ''
   let isScrollingByClick = false
+  let scrollTimeout: NodeJS.Timeout | null = null
 
   useEffect(() => {
     // 点击事件处理
@@ -40,15 +40,21 @@ const Markdown = ({ markdownText }: { markdownText: string }) => {
       if (targetHeading) {
         isScrollingByClick = true
 
+        // 清除之前的定时器
+        if (scrollTimeout) {
+          clearTimeout(scrollTimeout)
+        }
+
         targetHeading.scrollIntoView({
-          behavior: 'smooth', // 平滑滚动
-          block: 'start', // 滚动到元素的顶部
+          behavior: 'smooth',
+          block: 'start',
         })
 
-        // 等待滚动完成后重置标志位
-        setTimeout(() => {
+        // 设置一个合理的延时来恢复滚动事件监听
+        // 这个延时应该足够长，以确保平滑滚动完成
+        scrollTimeout = setTimeout(() => {
           isScrollingByClick = false
-        }, 1000)
+        }, 1000) // 1秒的延时，可以根据需要调整
       }
     }
 
@@ -98,6 +104,9 @@ const Markdown = ({ markdownText }: { markdownText: string }) => {
         toc.removeEventListener('click', handleTocClick)
       })
       window.removeEventListener('scroll', handleScroll)
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout)
+      }
     }
   }, [])
 
@@ -109,9 +118,6 @@ const Markdown = ({ markdownText }: { markdownText: string }) => {
         remarkPlugins={[gfm, directive, remarkCallout, remarkToc]}
         components={{
           code({ node, className, children, ...props }) {
-            // 适配指定行高亮
-            // tsx{3,4,5,8-11}
-            // const match = /language-(\w+)/.exec(className || '')
             const match = /language-(\w+)(\{(.*)\})?/.exec(className || '')
             const language = match ? match[1] : 'txt'
             const highlightLines = match ? match[3] : ''
@@ -121,7 +127,6 @@ const Markdown = ({ markdownText }: { markdownText: string }) => {
                   .map((line) => {
                     if (line.includes('-')) {
                       const [start, end] = line.split('-')
-                      // 8-11 -> [8, 9, 10, 11]
                       return Array.from({ length: Number(end) - Number(start) + 1 }, (_, i) => Number(start) + i)
                     }
                     return Number(line.trim())
@@ -153,18 +158,5 @@ const Markdown = ({ markdownText }: { markdownText: string }) => {
     </div>
   )
 }
-
-// 解析 HTML 注释，加入 rehypeRaw 后不需要了
-// function htmlComments() {
-//   // @ts-expect-error 类型来自 remark
-//   return (tree) => {
-//     visit(tree, 'html', (node, index, parent) => {
-//       // 移除 HTML 注释
-//       if (node.value.startsWith('<!--') && node.value.endsWith('-->')) {
-//         parent.children.splice(index, 1)
-//       }
-//     })
-//   }
-// }
 
 export default Markdown
