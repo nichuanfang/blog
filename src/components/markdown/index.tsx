@@ -48,7 +48,7 @@ const Markdown = ({ markdownText }: { markdownText: string }) => {
         // 等待滚动完成后重置标志位
         setTimeout(() => {
           isScrollingByClick = false
-        }, 500)
+        }, 1000)
       }
     }
 
