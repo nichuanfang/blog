@@ -26,20 +26,18 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
 
   useEffect(() => {
     // Clear all TOC styles on initial load
-    const clearTocStyles = () => {
-      const tocs = document.querySelectorAll('.toc-item')
-      tocs.forEach((toc) => {
-        toc.classList.remove('active-toc-item')
-        // 移除任何可能的内联样式
-        toc.removeAttribute('style')
-      })
-    }
+    // const clearTocStyles = () => {
+    //   const tocs = document.querySelectorAll('.toc-item')
+    //   tocs.forEach((toc) => {
+    //     toc.classList.remove('active-toc-item')
+    //   })
+    // }
 
     // Call clearTocStyles immediately when component mounts
-    clearTocStyles()
+    // clearTocStyles()
 
     // Add event listener for page refresh/load
-    window.addEventListener('load', clearTocStyles)
+    // window.addEventListener('load', clearTocStyles)
 
     const handleTocClick = (event: Event) => {
       const targetToc = event.target as HTMLElement
@@ -107,7 +105,7 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
     window.addEventListener('scroll', handleScroll)
 
     return () => {
-      window.removeEventListener('load', clearTocStyles)
+      // window.removeEventListener('load', clearTocStyles)
       tocs.forEach((toc) => {
         toc.removeEventListener('click', handleTocClick)
       })
@@ -126,6 +124,9 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
         remarkPlugins={[gfm, directive, remarkCallout, remarkToc]}
         components={{
           code({ node, className, children, ...props }) {
+            // 适配指定行高亮
+            // tsx{3,4,5,8-11}
+            // const match = /language-(\w+)/.exec(className || '')
             const match = /language-(\w+)(\{(.*)\})?/.exec(className || '')
             const language = match ? match[1] : 'txt'
             const highlightLines = match ? match[3] : ''
@@ -135,13 +136,13 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
                   .map((line) => {
                     if (line.includes('-')) {
                       const [start, end] = line.split('-')
+                      // 8-11 -> [8, 9, 10, 11]
                       return Array.from({ length: Number(end) - Number(start) + 1 }, (_, i) => Number(start) + i)
                     }
                     return Number(line.trim())
                   })
                   .flat()
               : []
-
             return match ? (
               <CodeBlock language={language} highlightLines={highlightLinesArr} text={children as string} {...props} />
             ) : (
