@@ -25,19 +25,14 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
   let scrollTimeout: NodeJS.Timeout | null = null
 
   useEffect(() => {
-    // Clear all TOC styles on initial load
-    // const clearTocStyles = () => {
-    //   const tocs = document.querySelectorAll('.toc-item')
-    //   tocs.forEach((toc) => {
-    //     toc.classList.remove('active-toc-item')
-    //   })
-    // }
+    const clearTocStyles = () => {
+      const tocs = document.querySelectorAll('.toc-item')
+      tocs.forEach((toc) => {
+        toc.classList.remove('active-toc-item')
+      })
+    }
 
-    // Call clearTocStyles immediately when component mounts
-    // clearTocStyles()
-
-    // Add event listener for page refresh/load
-    // window.addEventListener('load', clearTocStyles)
+    clearTocStyles()
 
     const handleTocClick = (event: Event) => {
       const targetToc = event.target as HTMLElement
@@ -105,7 +100,6 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
     window.addEventListener('scroll', handleScroll)
 
     return () => {
-      // window.removeEventListener('load', clearTocStyles)
       tocs.forEach((toc) => {
         toc.removeEventListener('click', handleTocClick)
       })
