@@ -32,7 +32,10 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
       })
     }
 
+    clearTocStyles()
+
     const handleTocClick = (event: Event) => {
+      event.preventDefault() // Prevent default anchor behavior
       const targetToc = event.target as HTMLElement
       const tocs = document.querySelectorAll('.toc-item')
 
