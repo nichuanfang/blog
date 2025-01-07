@@ -24,12 +24,12 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
   let isScrollingByClick = false
   let scrollTimeout: number | null = null
 
-  const clearTocStyles = useCallback(() => {
-    const tocs = document.querySelectorAll('.toc-item')
-    tocs.forEach((toc) => {
-      toc.classList.remove('active-toc-item')
-    })
-  }, [])
+  // const clearTocStyles = useCallback(() => {
+  //   const tocs = document.querySelectorAll('.toc-item')
+  //   tocs.forEach((toc) => {
+  //     toc.classList.remove('active-toc-item')
+  //   })
+  // }, [])
 
   const handleTocClick = useCallback(
     (event: Event) => {
@@ -94,7 +94,7 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
   }, [isScrollingByClick, lastVisibleHeading])
 
   useEffect(() => {
-    clearTocStyles()
+    // clearTocStyles()
 
     const tocs = document.querySelectorAll('.toc-item')
     tocs.forEach((toc) => {
@@ -112,7 +112,7 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
         clearTimeout(scrollTimeout)
       }
     }
-  }, [markdownText, handleTocClick, handleScroll, clearTocStyles])
+  }, [markdownText, handleTocClick, handleScroll])
 
   return (
     <div className="relative">
