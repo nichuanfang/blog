@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useCallback } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import directive from 'remark-directive'
@@ -24,17 +24,15 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
   let isScrollingByClick = false
   let scrollTimeout: number | null = null
 
-  useEffect(() => {
-    const clearTocStyles = () => {
-      const tocs = document.querySelectorAll('.toc-item')
-      tocs.forEach((toc) => {
-        toc.classList.remove('active-toc-item')
-      })
-    }
+  const clearTocStyles = useCallback(() => {
+    const tocs = document.querySelectorAll('.toc-item')
+    tocs.forEach((toc) => {
+      toc.classList.remove('active-toc-item')
+    })
+  }, [])
 
-    clearTocStyles()
-
-    const handleTocClick = (event: Event) => {
+  const handleTocClick = useCallback(
+    (event: Event) => {
       event.preventDefault() // Prevent default anchor behavior
       const targetToc = event.target as HTMLElement
       const tocs = document.querySelectorAll('.toc-item')
@@ -63,35 +61,40 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
           isScrollingByClick = false
         }, 1000)
       }
-    }
+    },
+    [scrollTimeout],
+  )
 
-    const handleScroll = () => {
-      if (isScrollingByClick) return
+  const handleScroll = useCallback(() => {
+    if (isScrollingByClick) return
 
-      const headings = document.querySelectorAll('h2, h3')
-      const tocs = document.querySelectorAll('.toc-item')
-      let currentVisibleHeading = ''
+    const headings = document.querySelectorAll('h2, h3')
+    const tocs = document.querySelectorAll('.toc-item')
+    let currentVisibleHeading = ''
 
-      Array.prototype.some.call(headings, (heading) => {
-        const rect = heading.getBoundingClientRect()
-        if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
-          currentVisibleHeading = heading.id
+    Array.prototype.some.call(headings, (heading) => {
+      const rect = heading.getBoundingClientRect()
+      if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
+        currentVisibleHeading = heading.id
 
-          if (currentVisibleHeading !== lastVisibleHeading) {
-            lastVisibleHeading = currentVisibleHeading
-            tocs.forEach((toc) => {
-              if ((toc as HTMLElement).textContent === currentVisibleHeading) {
-                toc.classList.add('active-toc-item')
-              } else {
-                toc.classList.remove('active-toc-item')
-              }
-            })
-          }
-          return true
+        if (currentVisibleHeading !== lastVisibleHeading) {
+          lastVisibleHeading = currentVisibleHeading
+          tocs.forEach((toc) => {
+            if ((toc as HTMLElement).textContent === currentVisibleHeading) {
+              toc.classList.add('active-toc-item')
+            } else {
+              toc.classList.remove('active-toc-item')
+            }
+          })
         }
-        return false
-      })
-    }
+        return true
+      }
+      return false
+    })
+  }, [isScrollingByClick, lastVisibleHeading])
+
+  useEffect(() => {
+    clearTocStyles()
 
     const tocs = document.querySelectorAll('.toc-item')
     tocs.forEach((toc) => {
@@ -109,7 +112,7 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
         clearTimeout(scrollTimeout)
       }
     }
-  }, [markdownText])
+  }, [markdownText, handleTocClick, handleScroll, clearTocStyles])
 
   return (
     <div className="relative">
