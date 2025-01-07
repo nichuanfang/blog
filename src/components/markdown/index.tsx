@@ -24,46 +24,30 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
   let isScrollingByClick = false
   let scrollTimeout: number | null = null
 
-  // const clearTocStyles = useCallback(() => {
-  //   const tocs = document.querySelectorAll('.toc-item')
-  //   tocs.forEach((toc) => {
-  //     toc.classList.remove('active-toc-item')
-  //   })
-  // }, [])
+  const handleTocClick = useCallback((event: Event) => {
+    event.preventDefault()
+    const targetToc = event.target as HTMLElement
+    const tocs = document.querySelectorAll('.toc-item')
 
-  const handleTocClick = useCallback(
-    (event: Event) => {
-      event.preventDefault() // Prevent default anchor behavior
-      const targetToc = event.target as HTMLElement
-      const tocs = document.querySelectorAll('.toc-item')
+    tocs.forEach((toc) => {
+      toc.classList.toggle('active-toc-item', toc.id === targetToc.id)
+    })
 
-      tocs.forEach((toc) => {
-        if (toc.id === targetToc.id) {
-          toc.classList.add('active-toc-item')
-        } else {
-          toc.classList.remove('active-toc-item')
-        }
+    const targetHeading = document.querySelector(`.items-center #${targetToc.id}`)
+    if (targetHeading) {
+      isScrollingByClick = true
+      clearTimeout(scrollTimeout)
+
+      targetHeading.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
       })
 
-      const targetHeading = document.querySelector(`.items-center #${targetToc.id}`)
-      if (targetHeading) {
-        isScrollingByClick = true
-        if (scrollTimeout !== null) {
-          clearTimeout(scrollTimeout)
-        }
-
-        targetHeading.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        })
-
-        scrollTimeout = window.setTimeout(() => {
-          isScrollingByClick = false
-        }, 1000)
-      }
-    },
-    [scrollTimeout],
-  )
+      scrollTimeout = window.setTimeout(() => {
+        isScrollingByClick = false
+      }, 1000)
+    }
+  }, [])
 
   const handleScroll = useCallback(() => {
     if (isScrollingByClick) return
@@ -72,7 +56,7 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
     const tocs = document.querySelectorAll('.toc-item')
     let currentVisibleHeading = ''
 
-    Array.prototype.some.call(headings, (heading) => {
+    Array.from(headings).some((heading) => {
       const rect = heading.getBoundingClientRect()
       if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
         currentVisibleHeading = heading.id
@@ -80,22 +64,16 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
         if (currentVisibleHeading !== lastVisibleHeading) {
           lastVisibleHeading = currentVisibleHeading
           tocs.forEach((toc) => {
-            if ((toc as HTMLElement).textContent === currentVisibleHeading) {
-              toc.classList.add('active-toc-item')
-            } else {
-              toc.classList.remove('active-toc-item')
-            }
+            toc.classList.toggle('active-toc-item', (toc as HTMLElement).textContent === currentVisibleHeading)
           })
         }
         return true
       }
       return false
     })
-  }, [isScrollingByClick, lastVisibleHeading])
+  }, [])
 
   useEffect(() => {
-    // clearTocStyles()
-
     const tocs = document.querySelectorAll('.toc-item')
     tocs.forEach((toc) => {
       toc.addEventListener('click', handleTocClick)
@@ -108,11 +86,9 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
         toc.removeEventListener('click', handleTocClick)
       })
       window.removeEventListener('scroll', handleScroll)
-      if (scrollTimeout !== null) {
-        clearTimeout(scrollTimeout)
-      }
+      clearTimeout(scrollTimeout)
     }
-  }, [markdownText, handleTocClick, handleScroll])
+  }, [handleTocClick, handleScroll])
 
   return (
     <div className="relative">
@@ -122,25 +98,18 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
         remarkPlugins={[gfm, directive, remarkCallout, remarkToc]}
         components={{
           code({ node, className, children, ...props }) {
-            // 适配指定行高亮
-            // tsx{3,4,5,8-11}
-            // const match = /language-(\w+)/.exec(className || '')
             const match = /language-(\w+)(\{(.*)\})?/.exec(className || '')
             const language = match ? match[1] : 'txt'
-            const highlightLines = match ? match[3] : ''
-            const highlightLinesArr = highlightLines
-              ? highlightLines
-                  .split(',')
-                  .map((line) => {
+            const highlightLinesArr =
+              match && match[3]
+                ? match[3].split(',').flatMap((line) => {
                     if (line.includes('-')) {
                       const [start, end] = line.split('-')
-                      // 8-11 -> [8, 9, 10, 11]
                       return Array.from({ length: Number(end) - Number(start) + 1 }, (_, i) => Number(start) + i)
                     }
                     return Number(line.trim())
                   })
-                  .flat()
-              : []
+                : []
             return match ? (
               <CodeBlock language={language} highlightLines={highlightLinesArr} text={children as string} {...props} />
             ) : (
