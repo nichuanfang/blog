@@ -122,6 +122,9 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
         remarkPlugins={[gfm, directive, remarkCallout, remarkToc]}
         components={{
           code({ node, className, children, ...props }) {
+            // 适配指定行高亮
+            // tsx{3,4,5,8-11}
+            // const match = /language-(\w+)/.exec(className || '')
             const match = /language-(\w+)(\{(.*)\})?/.exec(className || '')
             const language = match ? match[1] : 'txt'
             const highlightLines = match ? match[3] : ''
@@ -131,6 +134,7 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
                   .map((line) => {
                     if (line.includes('-')) {
                       const [start, end] = line.split('-')
+                      // 8-11 -> [8, 9, 10, 11]
                       return Array.from({ length: Number(end) - Number(start) + 1 }, (_, i) => Number(start) + i)
                     }
                     return Number(line.trim())
