@@ -22,7 +22,7 @@ interface MarkdownProps {
 const Markdown = ({ markdownText }: MarkdownProps) => {
   let lastVisibleHeading = ''
   let isScrollingByClick = false
-  let scrollTimeout: NodeJS.Timeout | null = null
+  let scrollTimeout: number | null = null
 
   useEffect(() => {
     const clearTocStyles = () => {
@@ -31,8 +31,6 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
         toc.classList.remove('active-toc-item')
       })
     }
-
-    clearTocStyles()
 
     const handleTocClick = (event: Event) => {
       const targetToc = event.target as HTMLElement
@@ -49,7 +47,7 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
       const targetHeading = document.querySelector(`.items-center #${targetToc.id}`)
       if (targetHeading) {
         isScrollingByClick = true
-        if (scrollTimeout) {
+        if (scrollTimeout !== null) {
           clearTimeout(scrollTimeout)
         }
 
@@ -58,7 +56,7 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
           block: 'start',
         })
 
-        scrollTimeout = setTimeout(() => {
+        scrollTimeout = window.setTimeout(() => {
           isScrollingByClick = false
         }, 1000)
       }
@@ -104,11 +102,11 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
         toc.removeEventListener('click', handleTocClick)
       })
       window.removeEventListener('scroll', handleScroll)
-      if (scrollTimeout) {
+      if (scrollTimeout !== null) {
         clearTimeout(scrollTimeout)
       }
     }
-  }, [])
+  }, [markdownText])
 
   return (
     <div className="relative">
@@ -118,9 +116,6 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
         remarkPlugins={[gfm, directive, remarkCallout, remarkToc]}
         components={{
           code({ node, className, children, ...props }) {
-            // 适配指定行高亮
-            // tsx{3,4,5,8-11}
-            // const match = /language-(\w+)/.exec(className || '')
             const match = /language-(\w+)(\{(.*)\})?/.exec(className || '')
             const language = match ? match[1] : 'txt'
             const highlightLines = match ? match[3] : ''
@@ -130,7 +125,6 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
                   .map((line) => {
                     if (line.includes('-')) {
                       const [start, end] = line.split('-')
-                      // 8-11 -> [8, 9, 10, 11]
                       return Array.from({ length: Number(end) - Number(start) + 1 }, (_, i) => Number(start) + i)
                     }
                     return Number(line.trim())
