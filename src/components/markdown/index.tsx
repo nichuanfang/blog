@@ -24,13 +24,6 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
   let isScrollingByClick = false
   let scrollTimeout: number | null = null
 
-  // const clearTocStyles = useCallback(() => {
-  //   const tocs = document.querySelectorAll('.toc-item')
-  //   tocs.forEach((toc) => {
-  //     toc.classList.remove('active-toc-item')
-  //   })
-  // }, [])
-
   const handleTocClick = useCallback(
     (event: Event) => {
       event.preventDefault() // Prevent default anchor behavior
@@ -94,8 +87,6 @@ const Markdown = ({ markdownText }: MarkdownProps) => {
   }, [isScrollingByClick, lastVisibleHeading])
 
   useEffect(() => {
-    // clearTocStyles()
-
     const tocs = document.querySelectorAll('.toc-item')
     tocs.forEach((toc) => {
       toc.addEventListener('click', handleTocClick)
