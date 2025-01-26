@@ -4,7 +4,7 @@ import { getBlogFrontMatterList } from '@/lib/blog'
 import { SEO } from '@/lib/constants'
 import { getTalkFrontMatterList } from '@/lib/talk'
 import { getWeeklyFrontMatterList } from '@/lib/weekly'
-
+ 
 const STATIC_MAP = [
   {
     url: getUrl('/').href,
